@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+  background: #f2f2f2;
+} */
+.suggest_card {
+    display: grid;
+    height: 85%;
+    place-items: center;
+    text-align: center;
+    background: #f2f2f2;
+    font-family: "Poppins", sans-serif;
+}
+.slider {
+    max-width: 1100px;
+    display: flex;
+}
+.slider .card {
+    flex: 1;
+    margin: 0 10px;
+    background: #fff;
+}
+.slider .card .img {
+    height: 200px;
+    width: 100%;
+}
+.slider .card .img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.slider .card .content {
+    padding: 10px 20px;
+}
+.card .content .title {
+    font-size: 25px;
+    font-weight: 600;
+}
+.card .content .sub-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: greenyellow;
+    line-height: 20px;
+}
+.card .content p {
+    text-align: justify;
+    margin: 10px 0;
+}
+.card .content .btn {
+    display: block;
+    text-align: left;
+    margin: 10px 0;
+}
+.card .content .btn {
+    width: 100px;
+    text-decoration: none;
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card .content .btn a {
+    color: #D9D9D9;
+    text-decoration: none;
+}
+
+.card .content .btn:hover {
+    transform: scale(0.9);
+}
+
+.suggest-p {
+    display: -webkit-box;
+    line-height: 27px; /* Fallback  */
+    max-height: 74px; /* Fallback số dòng bạn muốn giới hạn */
+    -webkit-line-clamp: 3; /* Số dòng bạn muốn giới hạn */
+    -webkit-box-orient: vertical;
+    visibility: visible;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 300px;
+}

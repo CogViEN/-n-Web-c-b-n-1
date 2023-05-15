@@ -1,0 +1,45 @@
+-- query theo số sản phẩm bán chạy và sản phẩm không bán chạy
+SELECT 
+products.id,
+products.name,
+ifnull(SUM(quantity), 0) as quantity_sales
+FROM products
+LEFT JOIN bill_product ON bill_product.product_id = products.id
+LEFT JOIN bill on bill.id = bill_product.order_id
+WHERE bill.status = 1 or bill.status IS null
+GROUP BY products.id
+ORDER BY quantity_sales desc
+
+-- doanh thu theo mốc thời gian
+SELECT SUM(total_price) from bill WHERE status = 1;
+
+-- khách hàng tiềm năng
+SELECT
+name,
+SUM(total_price)as total_paid
+FROM customers LEFT JOIN bill on bill.customer_id = customers.id
+WHERE bill.status = 1
+GROUP BY customers.id
+ORDER BY total_paid DESC
+
+
+-- query theo số đơn trong năm
+SELECT
+*
+FROM bill
+WHERE EXTRACT(YEAR FROM created_at) = '2023'
+
+-- query theo số đơn trong tháng
+SELECT
+*
+FROM bill
+WHERE EXTRACT(MONTH FROM created_at) = '03'
+and EXTRACT(YEAR FROM created_at) = '2023' 
+
+-- query theo số đơn một ngày bất kì
+SELECT
+*
+FROM bill
+WHERE EXTRACT(MONTH FROM created_at) = '03'
+and EXTRACT(YEAR FROM created_at) = '2023' 
+and EXTRACT(DAY FROM created_at) = '11'
