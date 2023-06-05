@@ -40,6 +40,9 @@ D. Super Admin
 
 File xem đầy đủ chức năng <br>
 [![Chức năng](https://play-lh.googleusercontent.com/i2n_rMLHjwLb925iRkj0yv5QtnoXCuq-Ass--FIeNDdFe4TEZ-hKBNFuhZi3RYIjnTbU)](https://docs.google.com/document/d/18yPXw7-7h9nocrwyAq4rS-o8htsxc_4-/edit?usp=sharing&ouid=100137837925519527245&rtpof=true&sd=true)
+<br>
+File Powerpoint
+[![Silde Powerpint](https://www.gstatic.com/images/branding/product/1x/slides_2020q4_48dp.png)](https://docs.google.com/presentation/d/14X_SH0FsVMAIlCLfaQrYyOwcot0i3Kf9rARSTpgvkyc/edit?usp=sharing)
 
 ## License
 
