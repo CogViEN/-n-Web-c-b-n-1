@@ -200,6 +200,13 @@
                    <li><a href="../thong_ke/xem_don_theo_thang.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Xem đơn theo tháng</a></li>
                 </ul>
              </li>
+             <li>
+                <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user" aria-hidden="true"></i></span>Nhân viên</a>
+                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                   <li><a href="../staff/create_account_staff.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Tạo tài khoản cho nhân viên</a></li>
+                   <li><a href="../staff/manage_staff.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Quản lí nhân viên</a></li>
+                </ul>
+             </li>
           </ul>
        </div>
        <!-- /#sidebar-wrapper -->

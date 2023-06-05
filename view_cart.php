@@ -18,10 +18,34 @@
     ?>
     <?php require 'menu.php' ?>
     <style>
-    #tren{
-        height: 7%
-    }
-</style>
+        #tren{
+            height: 7%
+        }
+        .example button {
+            float: left;
+            background-color: #4e3e55;
+            color: white;
+            border: none;
+            box-shadow: none;
+            font-size: 17px;
+            font-weight: 500;
+            font-weight: 600;
+            border-radius: 3px;
+            padding: 15px 35px;
+            margin: 26px 5px 0 5px;
+            cursor: pointer;
+        }
+        .example button:focus {
+            outline: none;
+        }
+        .example button:hover {
+            background-color: #33de23;
+        }
+        .example button:active {
+            background-color: #81ccee;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css">
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
@@ -29,7 +53,7 @@
                 <hr />
                 <h6 class="mb-0">Giỏ hàng</h6>
                 <div class="d-flex justify-content-between">
-                    <span>Bạn có <?php echo $count_product  ?> sản phẩm</span>
+                    <span id="count_product">Bạn có <?php echo $count_product  ?> sản phẩm</span>
                 </div>
                 <?php 
                     if(isset($_SESSION['cart'])){
@@ -104,7 +128,7 @@
         $each = mysqli_fetch_array($result);
         ?>
         <div class="col-md-4">
-            <form class="payment-info"  action="process_checkout.php" method="post">
+            <div class="payment-info">
                 <div class="d-flex justify-content-between align-items-center">
                     <span>Thông tin vận đơn hàng</span
                     ><img
@@ -117,6 +141,7 @@
                     <label class="credit-card-label">Tên người nhận</label
                     ><input
                         name="name_receiver"
+                        id="name_receiver"
                         type="text"
                         class="form-control credit-inputs"
                         placeholder="Name"
@@ -127,6 +152,7 @@
                     <label class="credit-card-label">SDT người nhận</label
                     ><input
                         name="phone_receiver"
+                        id="phone_receiver"
                         type="text"
                         class="form-control credit-inputs"
                         placeholder="0000 0000 0000 0000"
@@ -137,6 +163,7 @@
                     <label class="credit-card-label">Địa chỉ người nhận</label
                     ><input
                         name="address_receiver"
+                        id="address_receiver"
                         type="text"
                         class="form-control credit-inputs"
                         placeholder="Name"
@@ -150,19 +177,58 @@
                 <button
                     class="btn btn-primary btn-block d-flex justify-content-between mt-3"
                     type="submit"
+                    id="checkout_cart"
                 >
                     <span>Thanh toán<i class="fa fa-long-arrow-right ml-1"></i
                     ></span>
                 </button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Jquery process -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
+    <script src="https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js"></script>
+    <script src="notify.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#checkout_cart').click(function () { 
+                let name_receiver = $('#name_receiver').val();
+                let phone_receiver = $('#phone_receiver').val();
+                let address_receiver = $('#address_receiver').val();
+                
+                if(name_receiver.length != 0 && phone_receiver.length != 0 && address_receiver.length != 0){
+                        $.ajax({
+                            type: "POST",
+                            url: "process_checkout.php",
+                            data: {name_receiver, phone_receiver, address_receiver},
+                            // dataType: "dataType",
+                            success: function (response) {
+                                if(response == 0){
+                                    $.notify("Không tồn tại sản phẩm trong giỏ hàng!", "error");
+                                }
+                                else{
+                                    // swal("Good job!", "You clicked the button!", "success");
+                                    // window.location.href = 'index.php';
+                                    setTimeout(function() {
+                                        swal({
+                                            title: "Wow!",
+                                            text: "Bạn đã đăng ký đơn thành công!",
+                                            type: "success"
+                                        }, function() {
+                                            window.location = "index.php";
+                                        });
+                                    }, 500);
+                                }
+                            }
+                        });
+                }
+                else{
+                    $.notify("Bạn chưa điền đủ thông tin", "warn");
+                }      
+            });
+
             $(".btn-update-quantity").click(function () { 
                 let btn = $(this);
                 let id = btn.data('id');                
@@ -183,14 +249,18 @@
                         }
                         if(quantity === 0){
                             parent_tr.remove();
+                            const myArray = $("#count_product").html().split(" ");
+                            let countProduct = Number(myArray[2]) - 1;
+                            $("#count_product").html("Bạn có " + countProduct + " sản phẩm");
                         }
                         else{
                             parent_tr.find('.span-quantity').text(quantity);
                             let sum = price * quantity;
                             parent_tr.find('.span-sum').text(sum);
                         }
-                        getTotal();
                        
+                        getTotal();
+                        
                     }
                 });       
             });
@@ -204,7 +274,9 @@
                     success: function (response) {
                         btn.parents('#rt').remove();
                         getTotal();
-                        
+                        const myArray = $("#count_product").html().split(" ");
+                        let countProduct = Number(myArray[2]) - 1;
+                        $("#count_product").html("Bạn có " + countProduct + " sản phẩm");
                     }
                 });       
             });

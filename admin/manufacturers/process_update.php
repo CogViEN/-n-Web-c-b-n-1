@@ -7,23 +7,33 @@
 
     require '../connect.php';
     if(empty($id)){
-        header('location:index.php?');
-        exit;
+       echo 0;
     }
-    if(empty($name) || empty($address) || empty($image)){
-        header("location:form_update.php?error=Chưa nhập đầy đủ thông tin & id=$id");
-        exit;
+    else{
+        $sql = "SELECT * FROM `manufactures` 
+                WHERE name = '$name' and id != '$id'";
+        $result = mysqli_query($connect, $sql);
+        $row = mysqli_num_rows($result);
+
+        if($row == 1){
+            echo 0;
+        }
+        else{
+             $sql = "update manufactures
+                set
+                name='$name',
+                address='$address',
+                image='$image'
+                where id='$id'";
+                mysqli_query($connect, $sql);
+                echo 1;
+                mysqli_close($connect);
+        }
+
+       
     }
 
-    $sql = "update manufactures
-            set
-            name='$name',
-            address='$address',
-            image='$image'
-            where id='$id'";
-    mysqli_query($connect, $sql);
-    header('location:index.php?success=Sửa thành công');
-    mysqli_close($connect);
+    
 
     
     

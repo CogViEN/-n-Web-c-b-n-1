@@ -41,6 +41,7 @@
                         <button id="btnLastDate">Nhập</button>
                         <table id="myTable">
                             <tr>
+                                <th>Mã đơn</th>
                                 <th>Tên khách hàng</th>
                                 <th>Số điện thoại</th>
                                 <th>Địa chỉ</th>
@@ -62,6 +63,7 @@
             $('#btnLastDate').click(function () { 
                 $('._row').remove();
                 let month = $('#date').val();
+                let id = [];
                 let name_receiver = [];
                 let phone_receiver = [];
                 let address_receiver = [];
@@ -76,6 +78,7 @@
                         dataType: "json",
                         success: function (response) {
                             response.forEach(function(v) {
+                                id.push(v.id);
                                 name_receiver.push(v.name_receiver);
                                 phone_receiver.push(v.phone_receiver);
                                 address_receiver.push(v.address_receiver);
@@ -83,17 +86,18 @@
                                 created_at.push(v.created_at);
                                 total_price.push(v.total_price);
                             });
-                            insertTable(name_receiver, phone_receiver, address_receiver, status, created_at, total_price);
+                            insertTable(id, name_receiver, phone_receiver, address_receiver, status, created_at, total_price);
                         }
                     });   
                 }
             });
         });
-        function insertTable(name_receiver, phone_receiver, address_receiver, status, created_at, total_price) {
+        function insertTable(id, name_receiver, phone_receiver, address_receiver, status, created_at, total_price) {
             for (let index = 0; index < status.length; index++) {
                 if(status[index] == 2){
                     status[index] = "Đã hủy"
                     markup = '<tr class="_row">'
+                            + '<td>' + id[index] + '</td>'
                             + '<td>' + name_receiver[index] + '</td>'
                             + '<td>' + phone_receiver[index] + '</td>'
                             + '<td>' + address_receiver[index] + '</td>'
@@ -106,6 +110,7 @@
                     if(status[index] == 0) status[index] = "Mới đặt";
                     else status[index] = "Đã duyệt";
                     markup = '<tr class="_row">'
+                            + '<td>' + id[index] + '</td>'
                             + '<td>' + name_receiver[index] + '</td>'
                             + '<td>' + phone_receiver[index] + '</td>'
                             + '<td>' + address_receiver[index] + '</td>'

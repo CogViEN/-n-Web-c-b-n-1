@@ -15,6 +15,7 @@
         $arr = [];
         $i = 0;
         foreach ($result as $each) {
+            $arr[$i]['id'] = $each['id'];
             $arr[$i]['name_receiver'] = $each['name_receiver'];
             $arr[$i]['phone_receiver'] = $each['phone_receiver'];
             $arr[$i]['address_receiver'] = $each['address_receiver'];

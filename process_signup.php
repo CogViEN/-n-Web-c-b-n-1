@@ -14,7 +14,7 @@ $result = mysqli_query($connect, $sql);
 $number_rows = mysqli_fetch_array($result)['count(*)'];
 
 if($number_rows == 1){
-    echo '<h1>Trùng email rồi.Bạn chăc chứ, are you sure!</h1>';  
+    echo '<h1>Trùng email rồi.Bạn chăc chứ, are you sure!</h1>';        
     header( "Refresh:2; url=sign_up.php", true, 303);
     exit;
 }

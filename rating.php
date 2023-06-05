@@ -155,22 +155,25 @@
                   data-id='<?php echo $_GET['id'] ?>'>
                 Đánh giá    
             </button>
-        
+        <script src="notify.min.js"></script>
         <script>
             $(document).ready(function () {
                 $('.btn-rating-product').click(function () { 
                     let id = $(this).data('id');
                     let rating = $('input[name="rating"]:checked').val();
                     let comment = $('.comment').val();
-                    $.ajax({
-                        type: "GET",
-                        url: "process_rating.php",
-                        data: {comment,rating, id},
-                        // dataType: "dataType",
-                        success: function (data) {
-                            alert("Cảm ơn bạn đã đóng góp ý kiến");
-                        }
-                    });
+                    if(rating && comment){
+                            $.ajax({
+                            type: "GET",
+                            url: "process_rating.php",
+                            data: {comment,rating, id},
+                            // dataType: "dataType",
+                            success: function (data) {
+                                $.notify("Cảm ơn bạn đã đóng góp ý kiến", "success");
+                            }
+                        });
+                    }
+                    
                 });
             });
         </script>

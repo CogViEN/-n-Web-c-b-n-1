@@ -43,7 +43,7 @@
         <span id="error_mail"></span>
         <br>
         Mật khẩu
-        <input type="text" name="password" id="password">
+        <input type="password" name="password" id="password">
         <span id="error_password"></span>
         <br>
         Ghi nhớ đăng nhập

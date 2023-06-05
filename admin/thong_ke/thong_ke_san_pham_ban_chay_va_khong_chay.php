@@ -98,7 +98,7 @@
             success: function (response) {
                 storage = Object.values(response);
                 var page = 0;
-                var maxRow = 5;
+                var maxRow = 4;
                 createDash(storage, page, maxRow)
                 $(".fa-chevron-right").click((e) => {
                         e.preventDefault();
